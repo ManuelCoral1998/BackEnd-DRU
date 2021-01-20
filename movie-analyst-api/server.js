@@ -48,7 +48,7 @@ app.get('/reviewers', function(req, res){
     {name: 'Anthony Miller', publication : 'ComicBookHero.com', avatar : 'https://s3.amazonaws.com/uifaces/faces/twitter/9lessons/128.jpg'}
   ];*/
 
-  connection.query("SELECT * FROM movie_db.reviewer", (err, authors) => {
+  connection.query("SELECT * FROM movieDb.reviewer", (err, authors) => {
     if(err) throw err;
     res.json(authors);
   });
@@ -67,7 +67,7 @@ app.get('/publications', function(req, res){
     {name : 'ComicBookHero.com', avatar : 'glyphicon-flash'}
   ];*/
 
-  connection.query("SELECT * FROM movie_db.publication", (err, publications) => {
+  connection.query("SELECT * FROM movieDb.publication", (err, publications) => {
     if(err) throw err;
     res.json(publications);
   });
