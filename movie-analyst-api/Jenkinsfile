@@ -3,7 +3,7 @@ node {
         checkout scm
     }
 
-    stage('Run start') {
+    stage('Run test') {
         docker.image('node:latest') { c ->
             echo 'Performing tests'
             sh 'npm install --only=dev'
