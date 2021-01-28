@@ -4,7 +4,7 @@ node {
     }
 
     stage('Run test') {
-        def docker = docker.image('node').withRun() { c ->
+        def docker = docker.image('node:10.11.0-alpine').withRun() { c ->
             echo 'Performing tests'
             sh 'npm install --only=dev'
             sh 'npm test'
