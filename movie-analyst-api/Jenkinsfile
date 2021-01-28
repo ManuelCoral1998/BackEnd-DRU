@@ -4,7 +4,7 @@ node {
     }
 
     stage('Run test') {
-        dir ("${env-WORKSPACE/movie-analyst-api}") {
+        dir ('movie-analyst-api') {
             docker.image('node:10.11.0-alpine').inside() {
                 echo 'Performing tests'
                 sh 'cd movie-analyst-api'
