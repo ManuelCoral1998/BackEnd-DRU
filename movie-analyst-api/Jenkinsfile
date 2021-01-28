@@ -4,9 +4,9 @@ node {
     }
 
     stage('Run test') {
-        docker.image('node:10.11.0-alpine').withRun().inside() {
+        docker.image('node:10.11.0-alpine').inside() {
             echo 'Performing tests'
-            sh 'node server.js'
+            sh 'node -v'
             //sh 'npm test'
         }
     }
