@@ -4,7 +4,7 @@ node {
     }
 
     stage('Run test') {
-        docker.image('node:latest') { c ->
+        docker.image('node') { c ->
             echo 'Performing tests'
             sh 'npm install --only=dev'
             sh 'npm test'
