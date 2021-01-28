@@ -1,0 +1,14 @@
+node {
+    stage "Checkout scm"
+        checkout scm
+
+    stage "Run start"
+        docker.image('node:latest') { c ->
+            echo 'Performing tests'
+            sh 'npm install --only=dev'
+            sh 'npm test'
+        }
+
+    stage "Build docker image"
+        echo "Not yet"
+}
