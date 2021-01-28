@@ -4,8 +4,8 @@ node {
     }
 
     stage('Run test') {
-        def docker = docker.image('node:10.11.0-alpine').withRun() { c ->
-            sh 'sudo apt-get install -y npm'
+        docker.image('node:10.11.0-alpine').withRun() { c ->
+            sh 'sudo apt-get update && sudo apt-get install -y npm'
             echo 'Performing tests'
             sh 'npm install --only=dev'
             sh 'npm test'
