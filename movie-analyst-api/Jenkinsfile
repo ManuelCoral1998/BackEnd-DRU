@@ -6,6 +6,7 @@ node {
     stage('Run test') {
         docker.image('node:10.11.0-alpine').inside() {
             echo 'Performing tests'
+            sh 'cd movie-analyst-api'
             sh 'npm install ./movie-analyst-api/'
             sh 'npm test ./movie-analyst-api/'
         }
