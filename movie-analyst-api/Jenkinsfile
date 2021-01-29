@@ -14,12 +14,10 @@ node {
                 'DB_PASS=applicationuser',
                 'DB_NAME=movie_db'
             ]) {
-                docker.image('mysql:5').withRun('-e "MYSQL_ROOT_PASSWORD=applicationuser"') {c ->
-                    docker.image('node:10.11.0-alpine').inside {
-                        echo 'Performing tests'
-                        sh 'npm install'
-                        sh 'npm test'
-                    }
+                docker.image('node:10.11.0-alpine').inside {
+                    echo 'Performing tests'
+                    sh 'npm install'
+                    sh 'npm test'
                 }
             }
         }
