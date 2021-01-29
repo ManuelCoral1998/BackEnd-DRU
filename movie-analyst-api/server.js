@@ -10,8 +10,6 @@ var connection = mysql.createConnection({
   
 });
 
-connection.connect();
-
 //Testing endpoint
 app.get('/', function(req, res){
   var response = [{response : 'hello'}, {code : '200'}]
