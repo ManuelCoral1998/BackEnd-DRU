@@ -1,9 +1,6 @@
 node {
 
-    environment {
-        registryCredentials = 'docker-hub'
-        dockerImage = ''
-    }
+    def dockerImage
 
     step([$class: 'WsCleanup'])
 
@@ -29,7 +26,7 @@ node {
     }
 
     stage('Publish docker image') {
-        docker.withRegistry('', registryCredentials) {
+        docker.withRegistry('', 'docker-hub') {
             dockerImage.push("$BUILD_NUMBER")
         }
     }
