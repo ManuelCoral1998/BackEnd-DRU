@@ -12,7 +12,7 @@ node {
                 'DB_PASS=applicationuser',
                 'DB_NAME=movie_db'
             ]) {
-                docker.image('node:10.11.0-alpine').inside("--link ${c.id}:db") {
+                docker.image('node:10.11.0-alpine').inside {
                     echo 'Performing tests'
                     sh 'npm install'
                     sh 'npm test'
