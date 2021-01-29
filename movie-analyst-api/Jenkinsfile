@@ -7,16 +7,22 @@ node {
         dir ('movie-analyst-api') {
             withEnv([
                 'PORT=3000',
-                'DB_HOST=localhost',
+                'DB_HOST=db',
                 'DB_USER=applicationuser',
                 'DB_PASS=applicationuser',
                 'DB_NAME=movie_db'
             ]) {
-                docker.image('node:10.11.0-alpine').inside() {
-                    echo 'Performing tests'
-                    echo '$DB_USER - $DB_NAME'
-                    sh 'npm install'
-                    sh 'npm test'
+                docker.image('mysql:5').withRun('-e "MYSQL_ROOT_PASSWORD=applicationuser"') {c ->
+                    docker.image('mysql:5').inside("--link ${c.id}:db") {
+
+                         sh 'while ! mysqladmin ping -hdb --silent; do sleep 1; done'
+                    }
+                    docker.image('node:10.11.0-alpine').inside("--link ${c.id}:db") {
+                        echo 'Performing tests'
+                        echo '$DB_USER - $DB_NAME'
+                        sh 'npm install'
+                        sh 'npm test'
+                    }
                 }
             }
         }
