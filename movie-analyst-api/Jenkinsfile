@@ -21,7 +21,7 @@ node {
     stage('Build docker image') {
         dir ('movie-analyst-api') {
             echo "Building docker image"
-            dockerImage = docker.build("my-nodejs-image")
+            dockerImage = docker.build("manuel11coral23/my-node-js-image")
         }
     }
 
