@@ -1,4 +1,10 @@
 node {
+
+    environment {
+        registryCredentials = 'docker-hub'
+        dockerImage = ''
+    }
+
     step([$class: 'WsCleanup'])
 
     stage('Checkout scm') {
@@ -7,23 +13,24 @@ node {
 
     stage('Run test') {
         dir ('movie-analyst-api') {
-            withEnv([
-                'PORT=3000',
-                'DB_HOST=db',
-                'DB_USER=applicationuser',
-                'DB_PASS=applicationuser',
-                'DB_NAME=movie_db'
-            ]) {
-                docker.image('node:10.11.0-alpine').inside {
-                    echo 'Performing tests'
-                    sh 'npm install'
-                    sh 'npm test'
-                }
+            docker.image('node:10.11.0-alpine').inside {
+                echo 'Performing tests'
+                sh 'npm install'
+                sh 'npm test'
             }
         }
     }
 
     stage('Build docker image') {
-        echo "Not yet"
+        dir ('movie-analyst-api') {
+            echo "Building docker image"
+            dockerImage = docker.build("my-nodejs-image")
+        }
+    }
+
+    stage('Publish docker image') {
+        docker.withRegistry('', registryCredentials) {
+            dockerImage.push("$BUILD_NUMBER")
+        }
     }
 }
