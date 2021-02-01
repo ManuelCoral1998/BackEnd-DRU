@@ -30,4 +30,8 @@ node {
             dockerImage.push("$BUILD_NUMBER")
         }
     }
+
+    stage('Removing images') {
+        sh 'docker image prune -a -f'
+    }
 }
