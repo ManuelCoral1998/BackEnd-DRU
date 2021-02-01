@@ -21,7 +21,7 @@ node {
     stage('Build docker image') {
         dir ('movie-analyst-api') {
             echo "Building docker image"
-            dockerImage = docker.build("manuel11coral23/my-node-js-image")
+            dockerImage = docker.build("manuel11coral23/my-node-js-backend-image")
         }
     }
 
@@ -32,6 +32,6 @@ node {
     }
 
     stage('Removing images') {
-        sh 'docker image prune -a -f --filter "label!=manuel11coral23/my-node-js-image"'
+        sh 'docker image prune -a -f --filter "label!=manuel11coral23/my-node-js-backend-image"'
     }
 }
