@@ -10,11 +10,11 @@ chai.use(chaiHttp);
 
 var assert = require('assert');
 //Our parent block
-/*describe('API', () => {
+describe('API', () => {
 
-/*
+  /*
   * Test the /GET route
-  
+  */
   describe('/GET home', () => {
       it('it should GET any reply', (done) => {
         chai.request(server)
@@ -26,7 +26,7 @@ var assert = require('assert');
       });
   });
 
-});*/
+});
 
 describe('Array', function() {
   describe('#indexOf()', function() {
