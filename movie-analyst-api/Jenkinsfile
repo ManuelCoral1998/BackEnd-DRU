@@ -32,6 +32,6 @@ node {
     }
 
     stage('Removing images') {
-        sh 'docker image prune -a -f'
+        sh 'docker image prune -a -f --filter "label!=manuel11coral23/my-node-js-image"'
     }
 }
