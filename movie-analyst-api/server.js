@@ -55,6 +55,7 @@ app.get('/reviewers', function(req, res){
 
 // Implement the publications API endpoint
 app.get('/publications', function(req, res){
+  console.log("This is test message");
   /*var publications = [
     {name : 'The Daily Reviewer', avatar: 'glyphicon-eye-open'},
     {name : 'International Movie Critic', avatar: 'glyphicon-fire'},
