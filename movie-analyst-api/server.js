@@ -74,6 +74,7 @@ app.get('/publications', function(req, res){
 
 // Implement the pending reviews API endpoint
 app.get('/pending', function(req, res){
+  console.log("This is test message");
   var pending = [
     {title : 'Superman: Homecoming', release: '2017', score: 10, reviewer: 'Chris Harris', publication: 'International Movie Critic'},
     {title : 'Wonder Woman', release: '2017', score: 8, reviewer: 'Martin Thomas', publication : 'TheOne'},
