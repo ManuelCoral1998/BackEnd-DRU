@@ -1,0 +1,29 @@
+node {
+    step([$class: 'WsCleanup'])
+
+    stage ('Checkout aditional ConfigurationManagement repo') {
+        dir('CM') {
+            git branch: 'ansible-with-docker', url:"https://github.com/ManuelCoral1998/ConfigurationManagement-DRU.git"
+        }
+    }
+
+    stage('Execute deployment with ansible') {
+        dir('CM/CM-Jenkins') {
+            sh """
+                ansible-playbook -i ./inventory/ec2.py \
+                -l tag_Name_back_tf_devops_ramp_up_manuel_corall \
+                site.yml \
+                --private-key="${env.pemPath}" \
+                -u ubuntu -vvv \
+                -e back_host="${env.back_host}" \
+                -e db_host="${env.db_host}" \
+                -e db_user=applicationuser \
+                -e db_pass="${env.db_pass}" \
+                -e db_port=3306 \
+                -e port=3000 \
+                -e db_name=movie_db \
+                -e tag=${params.TAG}
+            """
+        }
+    }
+}

@@ -34,4 +34,10 @@ node {
     stage('Removing images') {
         sh 'docker image prune -a -f --filter "label!=manuel11coral23/my-node-js-backend-image"'
     }
+
+    stage('Trigger cd pipeline') {
+        build job: 'CD pipeline backend', parameters: [
+            string(name: 'TAG', value: "$BUILD_NUMBER")
+        ]
+    }
 }
